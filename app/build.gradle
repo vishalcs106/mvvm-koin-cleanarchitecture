@@ -1,0 +1,65 @@
+import dependencies.Dependencies
+import dependencies.SupportDependencies
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.app.imagemacroscreator"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Dependencies.kotlin_standard_library
+    implementation Dependencies.ktx
+
+    implementation SupportDependencies.appcompat
+    implementation SupportDependencies.constraintlayout
+    implementation Dependencies.fragment_ktx
+
+    implementation Dependencies.navigation_runtime
+    implementation Dependencies.navigation_ui
+    implementation Dependencies.navigation_fragment
+    implementation Dependencies.navigation_dynamic
+
+    implementation Dependencies.dagger
+    implementation Dependencies.room_runtime
+    implementation Dependencies.room_ktx
+
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofit_gson
+    implementation Dependencies.koin
+    implementation ("com.github.bumptech.glide:glide:4.14.2@aar") {
+        transitive = true
+    }
+    kapt AnnotationProcessing.glide
+}
